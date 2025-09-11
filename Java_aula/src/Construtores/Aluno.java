@@ -31,4 +31,19 @@ public class Aluno {
     public void setCurso(String curso){
         this.curso = curso;
     }
+    //is significa é, muito comum para funcções booleanas
+    public boolean isStatus(){
+        return this.status;
+    }
+    public void isStatus(Boolean status){
+        this.status = status;
+    }
+
+    public float getMediaGeral() {
+        return this.mediaGeral;
+    }
+
+    public void setMediaGeral(float mediaGeral) {
+        this.mediaGeral = mediaGeral;
+    }
 }
