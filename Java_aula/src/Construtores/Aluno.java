@@ -9,6 +9,21 @@ public class Aluno {
     private float mediaGeral;
 
     //construtor
+    public Aluno(){
+    }
+    //precisa ter o construtor vazio
+
+    public Aluno(int matricula, String nome, String curso, boolean status){
+        this.matricula = matricula;
+        this.nome = nome;
+        this.curso = curso;
+        this.status = status;
+        //esse é o meu construtor parametrizado
+    }
+    public Aluno(int matricula, String nome){
+        this.matricula = matricula;
+        this.nome = nome;
+    }
 
 
     //getter and setters
@@ -35,8 +50,11 @@ public class Aluno {
     public boolean isStatus(){
         return this.status;
     }
-    public void isStatus(Boolean status){
+    public void setStatus(Boolean status){
         this.status = status;
+    }
+    public boolean getStatus(){
+        return this.status;
     }
 
     public float getMediaGeral() {
@@ -46,4 +64,10 @@ public class Aluno {
     public void setMediaGeral(float mediaGeral) {
         this.mediaGeral = mediaGeral;
     }
+    //metodo operacional simples
+    public void calcularMedia(float n1, float n2, float n3){
+        //estou definindo as variaveis/parametros no meu parenteses
+        this.mediaGeral = (n1+n2+n3)/3;
+    }
+
 }
