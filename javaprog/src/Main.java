@@ -9,10 +9,10 @@ public class Main {
         Pessoa c4 = new Pessoa();
 
         //primeiro coloco os valores que quero no set
-        c1.setNome("Alisson");
-        c2.setNomeDoPai("Jose");
-        c3.setaltura(18);
-        c4.setIdade(18);
+        c1.setNome("Ana carol");
+        c2.setNomeDoPai("Carlos vidal jose espinosa");
+        c3.setaltura(168);
+        c4.setIdade(59);
 
         //agora so mostro com o print e a função/método get
         System.out.println("informações do Alisson: ");
@@ -21,8 +21,8 @@ public class Main {
 
         System.out.println("Seu nome é: " + c1.getNome());
         System.out.println("O nome do seu pai é: " + c2.getNomeDoPai());
-        System.out.println("Sua altura é: " + c3.getAltura());
-        System.out.println("Sua idade é : " + c4.getIdade());
+        System.out.println("altura do seu pai é: " + c3.getAltura());
+        System.out.println("idade do seu pai é : " + c4.getIdade());
 
 
         //agora a classe casa
@@ -37,9 +37,9 @@ public class Main {
 
         //colocando as sets
 
-        h1.setSala(true);
+        h1.setSala(false);
         h2.setCozinha(true);
-        h3.setLavanderia(false);
+        h3.setLavanderia(true);
         h4.setQuarto(true);
 
         //agora colocando os gets com os prints

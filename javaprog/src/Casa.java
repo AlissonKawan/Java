@@ -5,6 +5,16 @@ public class Casa {
     private boolean quarto;
     private boolean lavanderia;
 
+
+
+
+    public Casa(){
+
+    }
+    public Casa(boolean cozinha, boolean lavanderia){
+
+    }
+
     public boolean getSala(){
         return sala;
     }
