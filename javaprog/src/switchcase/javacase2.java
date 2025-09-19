@@ -54,7 +54,7 @@ public class javacase2 {
                 System.out.println("Final de placa invalido");
 
         }
-        System.out.println("Rodizio finalizado!A");
+        System.out.println("Rodizio finalizado!");
 
 
 
