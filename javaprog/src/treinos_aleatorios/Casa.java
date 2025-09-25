@@ -1,3 +1,5 @@
+package treinos_aleatorios;
+
 public class Casa {
 
     private boolean sala;

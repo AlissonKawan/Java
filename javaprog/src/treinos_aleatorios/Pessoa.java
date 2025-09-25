@@ -1,3 +1,5 @@
+package treinos_aleatorios;
+
 public class Pessoa {
 
     //atributos, estou fazendo os atributos para dps colocar os metodos nele para aplica-los

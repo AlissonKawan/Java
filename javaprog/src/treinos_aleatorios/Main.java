@@ -1,3 +1,5 @@
+package treinos_aleatorios;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -43,7 +45,7 @@ public class Main {
         h4.setQuarto(true);
 
         //agora colocando os gets com os prints
-        System.out.println("Casa do Alisson: ");
+        System.out.println("treinos_aleatorios.Casa do Alisson: ");
 
         System.out.println("\n");
 
