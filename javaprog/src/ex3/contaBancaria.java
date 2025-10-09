@@ -36,4 +36,9 @@ public class contaBancaria {
     public double consultarSaldo(){
         return saldoBancario;
     }
+    public void consultarInformacoes(){
+        System.out.println("Numero da conta: " + numeroDaConta);
+        System.out.println("Titular: " + titular);
+        System.out.println("Saldo bancario: " + saldoBancario);
+    }
 }

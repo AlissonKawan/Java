@@ -5,14 +5,19 @@ public class Leitura {
         //scanner é uma forma de interação com o usuario
         // new é para criar a propiedade junto com scanner system in que quer dizer q essa propiedade vai ser aplicada no computador
         Scanner leitura = new Scanner(System.in);
+        double mediaAvaliacao = 0;
+        double nota = 0;
 
-        System.out.println("Digite seu filme favorito: ");
-        String filme = leitura.nextLine();
-        System.out.println("Eita seu filme favorito é: " + filme);
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Diga sua avaliação para o filme: ");
+            nota = leitura.nextDouble();
+            mediaAvaliacao += nota;
+        }
 
-        System.out.println("Qual o ano de lançamento? ");
-        int anoDelancamento = leitura.nextInt();
-        System.out.println("Então o ano de lançamento é: " + anoDelancamento);
+        System.out.println("Media de avaliações: " + mediaAvaliacao/3);
+
+
+
 
         System.out.println("Qual sua avaliação para o filme? ");
         double avaliacao = leitura.nextDouble();
