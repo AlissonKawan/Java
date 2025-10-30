@@ -14,6 +14,7 @@ public class Main {
         Funcionario pedro = new Funcionario("Pedro", "pedro@gmail.com", "135", true, "F007", "Desenvolvimento" );
 
         //cliente usa método de cliente
+        joao.login();
         joao.fazerPedido();
         joao.visualizarPerfil();
 
