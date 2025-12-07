@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # IntelliJ
 .idea/
 *.iml
@@ -13,3 +14,37 @@ target/
 # Sistema
 .DS_Store
 Thumbs.db
+=======
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+!**/*.iml
+*.iml
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+.idea
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+>>>>>>> b379e72 (Primeiro commit: adicionando exercício Pessoa com Gson)
