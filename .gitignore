@@ -1,26 +1,7 @@
-<<<<<<< HEAD
-# IntelliJ
-.idea/
-*.iml
-out/
-target/
-
-# Java
-*.class
-*.jar
-*.war
-*.log
-
-# Sistema
-.DS_Store
-Thumbs.db
-=======
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-!**/*.iml
-*.iml
 
 ### Eclipse ###
 .apt_generated
@@ -30,7 +11,6 @@ out/
 .settings
 .springBeans
 .sts4-cache
-.idea
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
@@ -47,4 +27,3 @@ bin/
 
 ### Mac OS ###
 .DS_Store
->>>>>>> b379e72 (Primeiro commit: adicionando exercício Pessoa com Gson)
