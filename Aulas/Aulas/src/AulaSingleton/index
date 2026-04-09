@@ -1,0 +1,11 @@
+Um padrão de projeto, amplamente utilizado em POO,
+Garante que um codigo tem apenas uma instancia.
+Fornece acesso global
+
+Basicamente um padrão que deixa uma classe unica por exemplo:
+portaria de um prédio só tem uma portaria não tem outra
+
+Passos:
+1 - Construtor privado
+2 - instancia estatica da propia classe
+3 - Método de acesso estatico e Publico
