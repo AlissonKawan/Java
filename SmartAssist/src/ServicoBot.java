@@ -1,4 +1,4 @@
-package SmartAssist;
+
 
 import java.text.Normalizer;
 import java.util.ArrayList;

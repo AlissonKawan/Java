@@ -15,35 +15,35 @@ public class MulherApoloniaDAO {
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
+
+            // INSERIR NA PESSOA_ATENDIDA
             String sqlPessoa = "INSERT INTO pessoa_atendida " +
                     "(nome_codificado, data_cadastro, telefone, email, tipo) " +
                     "VALUES (?, ?, ?, ?, ?)";
 
             int pessoaId;
             try (PreparedStatement stmt = conn.prepareStatement(sqlPessoa, new String[]{"id"})) {
-                stmt.setString(1, mulher.getCodinome()); // usa codinome como nome_codificado
-                stmt.setObject(2, mulher.getData());     // data_cadastro
+                stmt.setString(1, mulher.getCodinome());
+                stmt.setObject(2, mulher.getData());
                 stmt.setString(3, mulher.getTelefone());
                 stmt.setString(4, mulher.getEmail());
-                stmt.setString(5, "MULHER");             // tipo = MULHER
-
+                stmt.setString(5, "MULHER");
                 stmt.executeUpdate();
 
                 try (ResultSet rs = stmt.getGeneratedKeys()) {
                     if (rs.next()) {
                         pessoaId = rs.getInt(1);
-                        System.out.println("ID gerado pela identity: " + pessoaId);
                     } else {
-                        throw new SQLException("Falha ao obter ID gerado de pessoa_atendida");
+                        throw new SQLException("Falha ao obter ID gerado");
                     }
                 }
-                System.out.println("Inserido na PESSOA_ATENDIDA");
             }
 
+            // INSERIR NA MULHER_APOLONIA
             String sqlMulher = "INSERT INTO mulher_apolonia " +
                     "(pessoa_id, codinome, nivel_risco, tem_boletim_ocorrencia, " +
-                    "necessita_sigilo_absoluto, email, telefone, data) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    "necessita_sigilo_absoluto) " +
+                    "VALUES (?, ?, ?, ?, ?)";
 
             try (PreparedStatement stmt = conn.prepareStatement(sqlMulher)) {
                 stmt.setInt(1, pessoaId);
@@ -51,45 +51,32 @@ public class MulherApoloniaDAO {
                 stmt.setInt(3, mulher.getNivelRisco());
                 stmt.setBoolean(4, mulher.isTemBoletimOcorrencia());
                 stmt.setBoolean(5, mulher.isNecessitaSigiloAbsoluto());
-                stmt.setString(6, mulher.getEmail());
-                stmt.setString(7, mulher.getTelefone());
-                stmt.setObject(8, mulher.getData());
-
                 stmt.executeUpdate();
-                System.out.println("Inserido na MULHER_APOLONIA");
             }
 
             conn.commit();
             mulher.setId(pessoaId);
-            System.out.println("SUCESSO! ID: " + pessoaId);
 
         } catch (SQLException e) {
-            System.err.println("ERRO: " + e.getMessage());
             if (conn != null) {
-                try {
-                    conn.rollback();
-                    System.err.println("Rollback executado");
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
             }
-            throw new RuntimeException("Erro ao inserir mulher apolônia: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao inserir: " + e.getMessage(), e);
         } finally {
             if (conn != null) {
                 try {
                     conn.setAutoCommit(true);
                     conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                } catch (SQLException e) { e.printStackTrace(); }
             }
         }
     }
 
+    // READ por ID
     public MulherApolonia buscarPorId(int id) {
         String sql = "SELECT ma.pessoa_id, ma.codinome, ma.nivel_risco, " +
                 "ma.tem_boletim_ocorrencia, ma.necessita_sigilo_absoluto, " +
-                "ma.email, ma.telefone, ma.data " +
+                "pa.nome_codificado, pa.data_cadastro, pa.telefone, pa.email " +
                 "FROM mulher_apolonia ma " +
                 "JOIN pessoa_atendida pa ON ma.pessoa_id = pa.id " +
                 "WHERE ma.pessoa_id = ?";
@@ -105,7 +92,7 @@ public class MulherApoloniaDAO {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao buscar mulher apolônia: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao buscar: " + e.getMessage(), e);
         }
         return null;
     }
@@ -114,7 +101,7 @@ public class MulherApoloniaDAO {
     public List<MulherApolonia> buscarTodos() {
         String sql = "SELECT ma.pessoa_id, ma.codinome, ma.nivel_risco, " +
                 "ma.tem_boletim_ocorrencia, ma.necessita_sigilo_absoluto, " +
-                "ma.email, ma.telefone, ma.data " +
+                "pa.nome_codificado, pa.data_cadastro, pa.telefone, pa.email " +
                 "FROM mulher_apolonia ma " +
                 "JOIN pessoa_atendida pa ON ma.pessoa_id = pa.id";
 
@@ -129,7 +116,7 @@ public class MulherApoloniaDAO {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao listar mulheres apolônia: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao listar: " + e.getMessage(), e);
         }
         return lista;
     }
@@ -154,20 +141,17 @@ public class MulherApoloniaDAO {
                 stmt.executeUpdate();
             }
 
-            // Atualiza MULHER_APOLONIA (somente campos próprios)
+            // Atualiza MULHER_APOLONIA
             String sqlMulher = "UPDATE mulher_apolonia SET " +
                     "codinome = ?, nivel_risco = ?, tem_boletim_ocorrencia = ?, " +
-                    "necessita_sigilo_absoluto = ?, email = ?, telefone = ?, data = ? " +
+                    "necessita_sigilo_absoluto = ? " +
                     "WHERE pessoa_id = ?";
             try (PreparedStatement stmt = conn.prepareStatement(sqlMulher)) {
                 stmt.setString(1, mulher.getCodinome());
                 stmt.setInt(2, mulher.getNivelRisco());
                 stmt.setBoolean(3, mulher.isTemBoletimOcorrencia());
                 stmt.setBoolean(4, mulher.isNecessitaSigiloAbsoluto());
-                stmt.setString(5, mulher.getEmail());
-                stmt.setString(6, mulher.getTelefone());
-                stmt.setObject(7, mulher.getData());
-                stmt.setInt(8, mulher.getId());
+                stmt.setInt(5, mulher.getId());
                 stmt.executeUpdate();
             }
 
@@ -177,15 +161,13 @@ public class MulherApoloniaDAO {
             if (conn != null) {
                 try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
             }
-            throw new RuntimeException("Erro ao atualizar mulher apolônia: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao atualizar: " + e.getMessage(), e);
         } finally {
             if (conn != null) {
                 try {
                     conn.setAutoCommit(true);
                     conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                } catch (SQLException e) { e.printStackTrace(); }
             }
         }
     }
@@ -197,13 +179,14 @@ public class MulherApoloniaDAO {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
-            // Ordem obrigatória: filho antes do pai (por causa da FK)
+            // Filho primeiro
             String sqlMulher = "DELETE FROM mulher_apolonia WHERE pessoa_id = ?";
             try (PreparedStatement stmt = conn.prepareStatement(sqlMulher)) {
                 stmt.setInt(1, id);
                 stmt.executeUpdate();
             }
 
+            // Depois pai
             String sqlPessoa = "DELETE FROM pessoa_atendida WHERE id = ?";
             try (PreparedStatement stmt = conn.prepareStatement(sqlPessoa)) {
                 stmt.setInt(1, id);
@@ -216,20 +199,18 @@ public class MulherApoloniaDAO {
             if (conn != null) {
                 try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
             }
-            throw new RuntimeException("Erro ao excluir mulher apolônia: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao excluir: " + e.getMessage(), e);
         } finally {
             if (conn != null) {
                 try {
                     conn.setAutoCommit(true);
                     conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                } catch (SQLException e) { e.printStackTrace(); }
             }
         }
     }
 
-    // MAPEAMENTO — pega cada coluna do resultado e preenche o objeto Java
+    // MAPEAMENTO
     private MulherApolonia mapearResultSet(ResultSet rs) throws SQLException {
         MulherApolonia m = new MulherApolonia();
         m.setId(rs.getInt("pessoa_id"));
@@ -237,9 +218,10 @@ public class MulherApoloniaDAO {
         m.setNivelRisco(rs.getInt("nivel_risco"));
         m.setTemBoletimOcorrencia(rs.getBoolean("tem_boletim_ocorrencia"));
         m.setNecessitaSigiloAbsoluto(rs.getBoolean("necessita_sigilo_absoluto"));
-        m.setEmail(rs.getString("email"));
+        m.setNomeCodificado(rs.getString("nome_codificado"));
+        m.setData(rs.getObject("data_cadastro", LocalDate.class));
         m.setTelefone(rs.getString("telefone"));
-        m.setData(rs.getObject("data", LocalDate.class));
+        m.setEmail(rs.getString("email"));
         return m;
     }
 }

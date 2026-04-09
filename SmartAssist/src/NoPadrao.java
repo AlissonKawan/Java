@@ -1,4 +1,4 @@
-package SmartAssist;
+
 
 public class NoPadrao extends NoDialogo {
     private Intencao intencaoVinculada;

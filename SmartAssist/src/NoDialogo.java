@@ -1,4 +1,3 @@
-package SmartAssist;
 
 public abstract class NoDialogo {
     private String id;
