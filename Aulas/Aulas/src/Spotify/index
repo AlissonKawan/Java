@@ -1,0 +1,14 @@
+Criar classe playlist
+Atributos: lista de musicas privado
+Métodos: Adicionar musica(String musica) , ListarMusicas() Void
+
+
+Criar classe teste
+vai ter 2 objetos, tipo playlist
+
+p1 vai adicionar uma musica assim como p2
+
+Para implementar o singleton eu tenho que definir a Playlist como unica
+Para isso preciso criar
+
+
