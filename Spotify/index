@@ -1,0 +1,27 @@
+Criar um projetinho, onde tenho uma simulação de um usuario do spotify.
+Criar Classe Playlist
+
+Playlist tem:
+-nomePlaylist
+-ListaMusicas
+-Usuario usuario
+métodos:
+mostrarMusicas()
+adicionarMusica()
+removerMusica()
+
+Criar classe Musica
+Musica tem:
+-nomeMusica
+-cantorOuBanda
+métodos:
+getter e setter
+
+
+
+Criar classe Usuario
+-nomeUsuario
+-listaPlaylist
+métodos:
+criarPlaylist()
+removerPlaylist()
