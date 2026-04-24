@@ -20,7 +20,7 @@ public class AtendimentoBO {
     private final HistoricoStatusDAO historicoDAO = new HistoricoStatusDAO();
     private final VoluntarioDAO voluntarioDAO = new VoluntarioDAO();
 
-    // MÉTODO 1: Calcular prioridade automaticamente
+    // Metodo: Calcular prioridade automaticamente
     // Regra de negócio: quanto maior o risco da mulher, maior a prioridade
     // Prioridade 1 = urgente, 2 = alta, 3 = normal
     public int calcularPrioridade(MulherApolonia mulher) {
@@ -42,7 +42,7 @@ public class AtendimentoBO {
         }
     }
 
-    // MÉTODO 2: Encerrar atendimento
+    // Metodo 2: Encerrar atendimento
     // Regra de negócio: só pode encerrar se o status for ABERTO ou EM_ATENDIMENTO
     // Ao encerrar: muda status para ENCERRADO e registra data de encerramento
     public void encerrarAtendimento(Atendimento atendimento, Voluntario responsavel) {
@@ -82,7 +82,7 @@ public class AtendimentoBO {
                 " encerrado em " + atendimento.getDataEncerramento());
     }
 
-    // MÉTODO 3: Verificar se voluntário pode atender
+    // Metodo 3: Verificar se voluntário pode atender
     // Regra de negócio: voluntário precisa estar disponível
     // Se o atendimento exige sigilo, o voluntário precisa ter acesso a sigilo
     public boolean voluntarioPodeAtender(Voluntario voluntario, Atendimento atendimento) {
@@ -112,7 +112,7 @@ public class AtendimentoBO {
         return true;
     }
 
-    // MÉTODO 4: Calcular tempo de atendimento em dias
+    // Metodo 4: Calcular tempo de atendimento em dias
     // Regra de negócio: calcula quantos dias o atendimento ficou aberto
     // Se ainda não encerrado, calcula até hoje
     public long calcularTempoAtendimentoDias(Atendimento atendimento) {
